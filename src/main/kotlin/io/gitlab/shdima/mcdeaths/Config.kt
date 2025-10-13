@@ -19,16 +19,11 @@ data class EntityConfiguration(
 @Configuration
 class Config {
     @Comment("The default configuration for mobs\nConfiguration under 'mobs' overrides this")
-    var default = EntityConfiguration(
-        all = false,
-        named = true,
-        tamed = false,
-        location = false,
-    )
+    var default = EntityConfiguration(named = true)
 
     @Comment("Overrides for specific entities")
     var mobs: Map<EntityType, EntityConfiguration> = mapOf(
-        Pair(EntityType.VILLAGER, EntityConfiguration(all = true, location = false)),
-        Pair(EntityType.WANDERING_TRADER, EntityConfiguration(all = true, location = false)),
+        Pair(EntityType.VILLAGER, EntityConfiguration(all = true)),
+        Pair(EntityType.WANDERING_TRADER, EntityConfiguration(all = true)),
     )
 }
