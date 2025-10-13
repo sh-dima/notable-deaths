@@ -6,7 +6,7 @@ import org.bukkit.entity.EntityType
 
 @Configuration
 data class EntityConfiguration(
-    @Comment("Whether death messages should be announced for all entities of this type")
+    @Comment("Whether death messages should be announced for all entities of this type\nOther conditions such as 'named' or 'tamed' will be ignored if this is true")
     var all: Boolean = false,
     @Comment("Whether death messages should be announced for named entities of this type")
     var named: Boolean = false,
