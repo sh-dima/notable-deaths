@@ -4,7 +4,7 @@ import de.exlll.configlib.Configuration
 import org.bukkit.entity.EntityType
 
 @Configuration
-data class EntityConfiguration(var all: Boolean = false, var location: Boolean = false)
+data class EntityConfiguration(var all: Boolean = false, var named: Boolean = false, var location: Boolean = false)
 
 @Configuration
 class Config {

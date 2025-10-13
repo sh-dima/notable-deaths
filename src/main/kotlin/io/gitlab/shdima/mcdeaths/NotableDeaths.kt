@@ -45,7 +45,13 @@ class NotableDeaths : JavaPlugin(), Listener {
         val type = entity.type
         val entityConfig = config.mobs[type] ?: return false
 
-        return entityConfig.all
+        val announceAll = entityConfig.all
+        if (announceAll) return true
+
+        val announceNamed = entityConfig.named
+        if (announceNamed && entity.customName() != null) return true
+
+        return false
     }
 
     @EventHandler
