@@ -8,6 +8,8 @@ This can also depend on whether the entity is a pet or has a custom name.
 
 The location of the death may also be displayed in the messages.
 
+The plugin uses Minecraft's message system meaning all languages are supported.
+
 Configuration
 -------------
 
