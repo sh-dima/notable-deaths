@@ -46,6 +46,7 @@ tasks {
         isReproducibleFileOrder = true
 
         from("LICENSE")
+        from("README.md")
 
         filePermissions {
             user.read = true
