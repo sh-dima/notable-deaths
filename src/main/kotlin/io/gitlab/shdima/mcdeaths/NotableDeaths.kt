@@ -45,7 +45,7 @@ class NotableDeaths : JavaPlugin(), Listener {
 
     private fun shouldAnnounceDeath(entity: LivingEntity): Boolean {
         val type = entity.type
-        val entityConfig = config.mobs[type] ?: return false
+        val entityConfig = config.mobs[type] ?: config.default
 
         val announceAll = entityConfig.all
         if (announceAll) return true
