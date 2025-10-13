@@ -3,6 +3,7 @@ package io.gitlab.shdima.mcdeaths
 import de.exlll.configlib.NameFormatters
 import de.exlll.configlib.YamlConfigurationProperties
 import de.exlll.configlib.YamlConfigurations
+import io.papermc.paper.event.entity.TameableDeathMessageEvent
 import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
 import org.bukkit.craftbukkit.entity.CraftPlayer
@@ -52,6 +53,13 @@ class NotableDeaths : JavaPlugin(), Listener {
         if (announceNamed && entity.customName() != null) return true
 
         return false
+    }
+
+    @EventHandler
+    private fun onTamedDeath(event: TameableDeathMessageEvent) {
+        val entity = event.entity
+
+        if (shouldAnnounceDeath(entity)) event.isCancelled = true
     }
 
     @EventHandler
