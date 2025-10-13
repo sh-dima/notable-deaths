@@ -45,7 +45,7 @@ class NotableDeaths : JavaPlugin(), Listener {
         val type = entity.type
         val entityConfig = config.mobs[type] ?: return false
 
-        return entityConfig.enabled
+        return entityConfig.all
     }
 
     @EventHandler
