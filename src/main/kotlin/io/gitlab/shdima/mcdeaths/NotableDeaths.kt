@@ -8,6 +8,7 @@ import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
 import org.bukkit.craftbukkit.entity.CraftPlayer
 import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.Tameable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
@@ -51,6 +52,9 @@ class NotableDeaths : JavaPlugin(), Listener {
 
         val announceNamed = entityConfig.named
         if (announceNamed && entity.customName() != null) return true
+
+        val announceTamed = entityConfig.tamed
+        if (announceTamed && entity is Tameable && entity.owner != null) return true
 
         return false
     }
