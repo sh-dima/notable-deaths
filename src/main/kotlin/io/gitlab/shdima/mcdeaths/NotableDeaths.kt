@@ -55,20 +55,8 @@ class NotableDeaths : JavaPlugin(), Listener {
         return false
     }
 
-    @EventHandler
-    private fun onTamedDeath(event: TameableDeathMessageEvent) {
-        val entity = event.entity
-
-        if (shouldAnnounceDeath(entity)) event.isCancelled = true
-    }
-
-    @EventHandler
-    private fun onDeath(event: EntityDeathEvent) {
-        val entity = event.entity
-        if (!shouldAnnounceDeath(entity)) return
-
+    private fun announceDeath(entity: LivingEntity) {
         val nmsEntity = (entity as CraftLivingEntity).handle
-
         val deathMessage = nmsEntity.combatTracker.deathMessage.copy()
 
         server.onlinePlayers.forEach {
@@ -79,5 +67,18 @@ class NotableDeaths : JavaPlugin(), Listener {
                 false, // Whether the message is an action bar message
             )
         }
+    }
+
+    @EventHandler
+    private fun onTamedDeath(event: TameableDeathMessageEvent) {
+        val entity = event.entity
+
+        if (shouldAnnounceDeath(entity)) event.isCancelled = true
+    }
+
+    @EventHandler
+    private fun onDeath(event: EntityDeathEvent) {
+        val entity = event.entity
+        if (shouldAnnounceDeath(entity)) announceDeath(entity)
     }
 }
