@@ -1,5 +1,7 @@
 package io.gitlab.shdima.mcdeaths
 
+import de.exlll.configlib.NameFormatters
+import de.exlll.configlib.YamlConfigurationProperties
 import org.bstats.bukkit.Metrics
 import de.exlll.configlib.YamlConfigurations
 import org.bukkit.plugin.java.JavaPlugin
@@ -12,13 +14,17 @@ class NotableDeaths : JavaPlugin() {
 
     override fun onEnable() {
         val configFile = Path.of(dataFolder.path, "config.yml")
+        val configProperties = YamlConfigurationProperties.newBuilder()
+            .setNameFormatter(NameFormatters.LOWER_KEBAB_CASE)
+            .build()
+
         config = try {
-            YamlConfigurations.load(configFile, Config::class.java)
+            YamlConfigurations.load(configFile, Config::class.java, configProperties)
         } catch (e: Exception) {
             Config()
         }
 
-//        YamlConfigurations.save(configFile, Config::class.java, config)
+//        YamlConfigurations.save(configFile, Config::class.java, config, configProperties)
 
         try {
             Metrics(this, 27578)
