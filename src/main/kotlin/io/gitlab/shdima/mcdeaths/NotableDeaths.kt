@@ -6,6 +6,7 @@ import de.exlll.configlib.YamlConfigurations
 import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
 import org.bukkit.craftbukkit.entity.CraftPlayer
+import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
@@ -40,14 +41,17 @@ class NotableDeaths : JavaPlugin(), Listener {
         server.pluginManager.registerEvents(this, this)
     }
 
+    private fun shouldAnnounceDeath(entity: LivingEntity): Boolean {
+        val type = entity.type
+        val entityConfig = config.mobs[type] ?: return false
+
+        return entityConfig.enabled
+    }
+
     @EventHandler
     private fun onDeath(event: EntityDeathEvent) {
         val entity = event.entity
-        val type = entity.type
-
-        val entityConfig = config.mobs[type] ?: return
-        val enabled = entityConfig.enabled
-        if (!enabled) return
+        if (!shouldAnnounceDeath(entity)) return
 
         val nmsEntity = (entity as CraftLivingEntity).handle
 
