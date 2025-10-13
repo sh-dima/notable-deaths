@@ -1,5 +1,5 @@
 {
-	description = "A template repository for Minecraft plugins";
+	description = "A Minecraft Paper plugin that lets servers display the death message of any entity";
 
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
