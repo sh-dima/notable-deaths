@@ -8,7 +8,6 @@ import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.ClickEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.HoverEvent
-import net.minecraft.network.chat.Style
 import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
 import org.bukkit.craftbukkit.entity.CraftPlayer
@@ -19,7 +18,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.plugin.java.JavaPlugin
 import java.nio.file.Path
-import java.util.function.UnaryOperator
 
 @Suppress("unused")
 class NotableDeaths : JavaPlugin(), Listener {
@@ -78,13 +76,12 @@ class NotableDeaths : JavaPlugin(), Listener {
             val coordinates = Component.translatable("chat.coordinates", location.blockX.toString(), location.blockY.toString(), location.blockZ.toString())
             val wrapped = Component.translatable("chat.square_brackets", coordinates)
 
-            wrapped.withStyle(
-                UnaryOperator<Style> { style -> style
-                        .withColor(ChatFormatting.GREEN)
-                        .withClickEvent(ClickEvent.SuggestCommand("/tp @s " + location.blockX + " " + location.blockY + " " + location.blockZ))
-                        .withHoverEvent(HoverEvent.ShowText(Component.translatable("chat.coordinates.tooltip")))
-                }
-            )
+            wrapped.withStyle { style ->
+                style
+                    .withColor(ChatFormatting.GREEN)
+                    .withClickEvent(ClickEvent.SuggestCommand("/tp @s " + location.blockX + " " + location.blockY + " " + location.blockZ))
+                    .withHoverEvent(HoverEvent.ShowText(Component.translatable("chat.coordinates.tooltip")))
+            }
 
             deathMessage.append(" ").append(wrapped)
         }
