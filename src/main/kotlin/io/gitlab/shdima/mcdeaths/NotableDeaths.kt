@@ -3,14 +3,16 @@ package io.gitlab.shdima.mcdeaths
 import de.exlll.configlib.NameFormatters
 import de.exlll.configlib.YamlConfigurationProperties
 import de.exlll.configlib.YamlConfigurations
+import io.papermc.paper.adventure.PaperAdventure
 import io.papermc.paper.event.entity.TameableDeathMessageEvent
-import net.minecraft.ChatFormatting
-import net.minecraft.network.chat.ClickEvent
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.HoverEvent
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.event.HoverEvent
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.Style
+import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
-import org.bukkit.craftbukkit.entity.CraftPlayer
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Tameable
 import org.bukkit.event.EventHandler
@@ -22,9 +24,12 @@ import java.nio.file.Path
 @Suppress("unused")
 class NotableDeaths : JavaPlugin(), Listener {
 
+    private lateinit var mm: MiniMessage
     private lateinit var config: Config
 
     override fun onEnable() {
+        mm = MiniMessage.miniMessage()
+
         val configFile = Path.of(dataFolder.path, "config.yml")
         val configProperties = YamlConfigurationProperties.newBuilder()
             .setNameFormatter(NameFormatters.LOWER_KEBAB_CASE)
@@ -65,7 +70,7 @@ class NotableDeaths : JavaPlugin(), Listener {
 
     private fun announceDeath(entity: LivingEntity) {
         val nmsEntity = (entity as CraftLivingEntity).handle
-        var deathMessage = nmsEntity.combatTracker.deathMessage.copy()
+        var deathMessage = PaperAdventure.asAdventure(nmsEntity.combatTracker.deathMessage.copy())
 
         val type = entity.type
         val showLocation = config.mobs[type]?.location ?: config.default.location
@@ -73,27 +78,24 @@ class NotableDeaths : JavaPlugin(), Listener {
         if (showLocation) {
             val location = entity.location
 
-            val coordinates = Component.translatable("chat.coordinates", location.blockX.toString(), location.blockY.toString(), location.blockZ.toString())
+            val coordinates = Component.translatable(
+                "chat.coordinates",
+                Component.text(location.blockX),
+                Component.text(location.blockY),
+                Component.text(location.blockZ),
+            )
+
+            val clickToTeleport = Component.translatable("chat.coordinates.tooltip")
             val wrapped = Component.translatable("chat.square_brackets", coordinates)
 
-            wrapped.withStyle { style ->
-                style
-                    .withColor(ChatFormatting.GREEN)
-                    .withClickEvent(ClickEvent.SuggestCommand("/tp @s " + location.blockX + " " + location.blockY + " " + location.blockZ))
-                    .withHoverEvent(HoverEvent.ShowText(Component.translatable("chat.coordinates.tooltip")))
-            }
-
-            deathMessage.append(" ").append(wrapped)
+            deathMessage = mm.deserialize("<green><click:suggest_command:'/tp @s ${location.blockX} ${location.blockY} ${location.blockZ}'><hover:show_text:'${mm.serialize(clickToTeleport)}'>${mm.serialize(wrapped)}</hover></click></green> ${mm.serialize(deathMessage)}")
         }
 
         server.onlinePlayers.forEach {
-            val serverPlayer = (it as CraftPlayer).handle
-
-            serverPlayer.displayClientMessage(
-                deathMessage,
-                false, // Whether the message is an action bar message
-            )
+            it.sendMessage(deathMessage)
         }
+
+        server.consoleSender.sendMessage(deathMessage)
     }
 
     @EventHandler
@@ -108,4 +110,11 @@ class NotableDeaths : JavaPlugin(), Listener {
         val entity = event.entity
         if (shouldAnnounceDeath(entity)) announceDeath(entity)
     }
+}
+
+fun Component.stripStyles(): Component {
+    // Create a new component with empty style, and recursively process children
+    return this.style(Style.empty()).children(
+        this.children().map { it.stripStyles() }
+    )
 }
