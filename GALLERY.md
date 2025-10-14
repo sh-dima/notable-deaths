@@ -36,3 +36,9 @@ This plugin uses Minecraft's localization, meaning all languages are supported, 
 Entity metadata can be seen in the death messages.
 
 ![Librarian death](./assets/images/screenshots/librarian-death.png)
+
+## Location Messages
+
+Death locations can also be announced in chat.
+
+![Location message](./assets/images/screenshots/location-message.png)
