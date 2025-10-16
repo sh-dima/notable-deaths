@@ -65,7 +65,7 @@ Disclaimer
 [email]: mailto:DimaFYI@proton.me (E-mail the author of this project)
 
 [source]: https://gitlab.com/shdima/notable-deaths (The source code of this project)
-[modrinth]: https://modrinth.com/project/deaths (This project on Modrinth)
+[modrinth]: https://modrinth.com/plugin/notable-deaths (This project on Modrinth)
 [spigot]: https://www.spigotmc.org/resources/notable-deaths-paper-only.129507/ (This project on SpigotMC)
 [hangar]: https://hangar.papermc.io/EsotericEnderman/NotableDeaths (This project on Hangar)
 [bstats]: https://bstats.org/plugin/bukkit/Notable%20Deaths/27578 (This project on bStats)
