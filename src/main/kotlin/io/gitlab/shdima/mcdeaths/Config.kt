@@ -25,5 +25,7 @@ class Config {
     var mobs: Map<EntityType, EntityConfiguration> = mapOf(
         Pair(EntityType.VILLAGER, EntityConfiguration(all = true)),
         Pair(EntityType.WANDERING_TRADER, EntityConfiguration(all = true)),
+        Pair(EntityType.WITHER, EntityConfiguration(all = true)),
+        Pair(EntityType.ENDER_DRAGON, EntityConfiguration(all = true)),
     )
 }
