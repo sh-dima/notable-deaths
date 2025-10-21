@@ -40,6 +40,36 @@ mobs:
     named: false
     tamed: false
     location: false
+  WITHER:
+    all: true
+    named: false
+    tamed: false
+    location: false
+  ENDER_DRAGON:
+    all: true
+    named: false
+    tamed: false
+    location: false
+  ELDER_GUARDIAN:
+    all: true
+    named: false
+    tamed: false
+    location: false
+  WARDEN:
+    all: true
+    named: false
+    tamed: false
+    location: false
+  ILLUSIONER:
+    all: true
+    named: false
+    tamed: false
+    location: false
+  GIANT:
+    all: true
+    named: false
+    tamed: false
+    location: false
 ```
 
 The section under `default` applies to all entities, unless there exists an entry for that entity under `mobs`, in which case that entry takes priority.
