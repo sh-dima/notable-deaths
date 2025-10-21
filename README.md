@@ -62,7 +62,7 @@ Disclaimer
 * NOT AN OFFICIAL [MINECRAFT][minecraft] PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH [MOJANG][mojang] OR [MICROSOFT][microsoft].
 
 [author]: https://gitlab.com/shdima/ (The author of this project)
-[email]: mailto:DimaFYI@proton.me (E-mail the author of this project)
+[email]: mailto:dima.o.sh@proton.me (E-mail the author of this project)
 
 [source]: https://gitlab.com/shdima/notable-deaths (The source code of this project)
 [modrinth]: https://modrinth.com/plugin/notable-deaths (This project on Modrinth)
