@@ -12,6 +12,12 @@ Death message being displayed for a villager, server using the default configura
 
 ![Villager death](./assets/images/screenshots/villager-death.png)
 
+## Boss Death Message
+
+Announce to the whole server when boss mobs are killed.
+
+![Dragon death](./assets/images/screenshots/dragon-death.png)
+
 ## Named Entity Death Message
 
 A death message being displayed for a named entity.
