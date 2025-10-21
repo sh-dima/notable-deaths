@@ -27,6 +27,8 @@ class Config {
         Pair(EntityType.WANDERING_TRADER, EntityConfiguration(all = true)),
         Pair(EntityType.WITHER, EntityConfiguration(all = true)),
         Pair(EntityType.ENDER_DRAGON, EntityConfiguration(all = true)),
+        Pair(EntityType.ELDER_GUARDIAN, EntityConfiguration(all = true)),
+        Pair(EntityType.WARDEN, EntityConfiguration(all = true)),
         Pair(EntityType.ILLUSIONER, EntityConfiguration(all = true)),
         Pair(EntityType.GIANT, EntityConfiguration(all = true)),
     )
