@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+* Withers, dragons, illusioners, giants, elder guardians, and wardens will now have death messages by default.
+
 ## 1.0.0
 
 * Added option to display death messages for any entity type.
