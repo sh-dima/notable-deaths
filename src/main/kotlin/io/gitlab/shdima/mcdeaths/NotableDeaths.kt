@@ -6,10 +6,6 @@ import de.exlll.configlib.YamlConfigurations
 import io.papermc.paper.adventure.PaperAdventure
 import io.papermc.paper.event.entity.TameableDeathMessageEvent
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.event.ClickEvent
-import net.kyori.adventure.text.event.HoverEvent
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
@@ -110,11 +106,4 @@ class NotableDeaths : JavaPlugin(), Listener {
         val entity = event.entity
         if (shouldAnnounceDeath(entity)) announceDeath(entity)
     }
-}
-
-fun Component.stripStyles(): Component {
-    // Create a new component with empty style, and recursively process children
-    return this.style(Style.empty()).children(
-        this.children().map { it.stripStyles() }
-    )
 }
