@@ -106,7 +106,7 @@ bukkit {
     description = "A Minecraft Paper plugin that lets servers display the death message of any entity"
 
     main = "io.gitlab.shdima.mcdeaths.NotableDeaths"
-    apiVersion = "1.20"
+    apiVersion = "1.20.5"
     version = project.version.toString()
 
     authors = listOf(
