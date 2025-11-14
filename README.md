@@ -77,7 +77,8 @@ The section under `default` applies to all entities, unless there exists an entr
 Links
 -----
 
-* [Source][source]
+* [GitLab][gitlab]
+* [GitHub][github]
 * [Modrinth][modrinth]
 * [Hangar][hangar]
 * [SpigotMC][spigot]
@@ -94,7 +95,8 @@ Disclaimer
 [author]: https://gitlab.com/shdima/ (The author of this project)
 [email]: mailto:dima.o.sh@proton.me (E-mail the author of this project)
 
-[source]: https://gitlab.com/shdima/notable-deaths (The source code of this project)
+[gitlab]: https://gitlab.com/shdima/notable-deaths (The source code of this project on GitLab)
+[github]: https://github.com/sh-dima/notable-deaths (The source code of this project on GitHub)
 [modrinth]: https://modrinth.com/plugin/notable-deaths (This project on Modrinth)
 [spigot]: https://www.spigotmc.org/resources/notable-deaths-paper-only.129507/ (This project on SpigotMC)
 [hangar]: https://hangar.papermc.io/EsotericEnderman/NotableDeaths (This project on Hangar)
