@@ -70,6 +70,10 @@ mobs:
     named: false
     tamed: false
     location: false
+# Discord configuration: will send messages to the channel specified by channel ID
+# if channel ID and bot token are specified
+channel-id: ''
+bot-token: ''
 ```
 
 The section under `default` applies to all entities, unless there exists an entry for that entity under `mobs`, in which case that entry takes priority.

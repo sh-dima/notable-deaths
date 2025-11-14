@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+* Added Discord integration.
+
 ## 1.1.0
 
 * Withers, dragons, illusioners, giants, elder guardians, and wardens will now have death messages by default.
