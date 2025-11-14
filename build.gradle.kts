@@ -17,6 +17,7 @@ repositories {
 dependencies {
     library(kotlin("stdlib"))
     library(libs.config)
+    library(libs.jda)
     implementation(libs.metrics)
 
     testImplementation(libs.kotlin.test)
@@ -98,6 +99,10 @@ tasks {
         val version = project.findProperty("minecraft.version") as? String ?: "1.21.8"
 
         minecraftVersion(version)
+
+        downloadPlugins {
+            modrinth("UmLGoGij", "1.30.2")
+        }
     }
 }
 

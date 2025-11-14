@@ -5,8 +5,13 @@ import de.exlll.configlib.YamlConfigurationProperties
 import de.exlll.configlib.YamlConfigurations
 import io.papermc.paper.adventure.PaperAdventure
 import io.papermc.paper.event.entity.TameableDeathMessageEvent
+import net.dv8tion.jda.api.EmbedBuilder
+import net.dv8tion.jda.api.JDA
+import net.dv8tion.jda.api.JDABuilder
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bstats.bukkit.Metrics
 import org.bukkit.craftbukkit.entity.CraftLivingEntity
 import org.bukkit.entity.LivingEntity
@@ -15,6 +20,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.plugin.java.JavaPlugin
+import java.awt.Color
 import java.nio.file.Path
 
 @Suppress("unused")
@@ -22,6 +28,8 @@ class NotableDeaths : JavaPlugin(), Listener {
 
     private lateinit var mm: MiniMessage
     private lateinit var config: Config
+
+    private var jda: JDA? = null
 
     override fun onEnable() {
         mm = MiniMessage.miniMessage()
@@ -41,11 +49,20 @@ class NotableDeaths : JavaPlugin(), Listener {
 
         try {
             Metrics(this, 27578)
+
+            if (!config.channelId.isEmpty() && !config.botToken.isEmpty()) {
+                jda = JDABuilder.createDefault(config.botToken).build().awaitReady()
+                logger.info("Successfully loaded JDA")
+            }
         } catch (exception: Exception) {
             exception.printStackTrace()
         }
 
         server.pluginManager.registerEvents(this, this)
+    }
+
+    override fun onDisable() {
+        jda?.shutdownNow()
     }
 
     private fun shouldAnnounceDeath(entity: LivingEntity): Boolean {
@@ -92,6 +109,29 @@ class NotableDeaths : JavaPlugin(), Listener {
         }
 
         server.consoleSender.sendMessage(deathMessage)
+
+        if (jda == null) {
+            if (!config.channelId.isEmpty() || !config.botToken.isEmpty()) {
+                logger.warning("Invalid JDA configuration! Unable to send death message")
+            }
+
+            return
+        }
+
+        val textChannel = jda!!.getChannelById<TextChannel>(TextChannel::class.java, config.channelId)
+
+        if (textChannel == null) {
+            logger.warning("Couldn't find text channel with ID ${config.channelId}")
+            return
+        }
+
+        val embed = EmbedBuilder()
+            .setAuthor(PlainTextComponentSerializer.plainText().serialize(deathMessage))
+            .setColor(Color.getHSBColor(1.0F, 1.0F, 0.0F)) // Force color to be exactly black, same as DiscordSRV
+            .build()
+
+        val action = textChannel.sendMessageEmbeds(embed)
+        action.submit()
     }
 
     @EventHandler

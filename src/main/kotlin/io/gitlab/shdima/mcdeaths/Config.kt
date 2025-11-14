@@ -32,4 +32,8 @@ class Config {
         Pair(EntityType.ILLUSIONER, EntityConfiguration(all = true)),
         Pair(EntityType.GIANT, EntityConfiguration(all = true)),
     )
+
+    @Comment("Discord configuration: will send messages to the channel specified by channel ID\nif channel ID and bot token are specified")
+    var channelId: String = ""
+    var botToken: String = ""
 }
