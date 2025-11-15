@@ -127,7 +127,7 @@ class NotableDeaths : JavaPlugin(), Listener {
 
         val embed = EmbedBuilder()
             .setAuthor(PlainTextComponentSerializer.plainText().serialize(deathMessage))
-            .setColor(Color.getHSBColor(1.0F, 1.0F, 0.0F)) // Force color to be exactly black, same as DiscordSRV
+            .setColor(Color.getHSBColor(1.0F, 1.0F, 0.001F)) // Force color to be exactly black, same as DiscordSRV
             .build()
 
         val action = textChannel.sendMessageEmbeds(embed)
