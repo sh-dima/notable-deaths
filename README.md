@@ -89,23 +89,24 @@ Links
 * [bStats][bstats]
 * [E-mail][email]
 
+License
+-------
+
+© 2025 [Дима Ш.][author]
+
+[Notable Deaths](./) is licensed under the [AGPL 3.0](./LICENSE) only.
+
 Disclaimer
 ----------
 
-* [The author][author] (not [Mojang][mojang] or [Microsoft][microsoft]) is responsible for the product or service.
-* [The author][author] is the publisher and owner.
-* NOT AN OFFICIAL [MINECRAFT][minecraft] PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH [MOJANG][mojang] OR [MICROSOFT][microsoft].
+NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-[author]: https://gitlab.com/shdima/ (The author of this project)
+[author]: https://gitlab.com/-/u/24902750 (The author of this project)
 [email]: mailto:dima.o.sh@proton.me (E-mail the author of this project)
 
-[gitlab]: https://gitlab.com/shdima/notable-deaths (The source code of this project on GitLab)
+[gitlab]: https://gitlab.com/-/p/75274998 (The source code of this project on GitLab)
 [github]: https://github.com/sh-dima/notable-deaths (The source code of this project on GitHub)
-[modrinth]: https://modrinth.com/plugin/notable-deaths (This project on Modrinth)
+[modrinth]: https://modrinth.com/project/ZA82D8Xe (This project on Modrinth)
 [spigot]: https://www.spigotmc.org/resources/notable-deaths-paper-only.129507/ (This project on SpigotMC)
 [hangar]: https://hangar.papermc.io/EsotericEnderman/NotableDeaths (This project on Hangar)
 [bstats]: https://bstats.org/plugin/bukkit/Notable%20Deaths/27578 (This project on bStats)
-
-[minecraft]: https://www.minecraft.net/ (Minecraft)
-[microsoft]: https://www.microsoft.com/ (Microsoft)
-[mojang]: https://minecraft.wiki/w/Mojang_Studios (Mojang Studios)
