@@ -101,7 +101,7 @@ Disclaimer
 
 NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-[author]: https://gitlab.com/-/u/24902750 (The author of this project)
+[author]: https://shdima.gitlab.io/ (The author of this project)
 [email]: mailto:dima.o.sh@proton.me (E-mail the author of this project)
 
 [gitlab]: https://gitlab.com/-/p/75274998 (The source code of this project on GitLab)
