@@ -47,6 +47,7 @@ tasks {
         isReproducibleFileOrder = true
 
         from("LICENSE.txt")
+        from("NOTICE.txt")
         from("README.md")
 
         filePermissions {
