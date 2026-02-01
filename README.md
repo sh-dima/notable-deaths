@@ -28,6 +28,10 @@ default:
   tamed: false
   # Whether the location should be broadcast along with the death message for entities of this type
   location: false
+# Whether the deaths of tamed entities should be announced to everyone on the server,
+# instead of just the pet owner
+# This option only takes effect if the death is set to be announced for that tamed entity.
+broadcast-tamed-deaths: false
 # Overrides for specific entities
 mobs:
   VILLAGER:

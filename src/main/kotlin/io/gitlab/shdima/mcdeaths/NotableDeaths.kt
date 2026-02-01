@@ -22,6 +22,7 @@ import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.plugin.java.JavaPlugin
 import java.awt.Color
 import java.nio.file.Path
+import java.util.UUID
 
 @Suppress("unused")
 class NotableDeaths : JavaPlugin(), Listener {
@@ -65,23 +66,27 @@ class NotableDeaths : JavaPlugin(), Listener {
         jda?.shutdownNow()
     }
 
-    private fun shouldAnnounceDeath(entity: LivingEntity): Boolean {
+    private fun getDeathWitnesses(entity: LivingEntity): List<UUID> {
+        val everyone = server.onlinePlayers.map { it.uniqueId }
+
         val type = entity.type
         val entityConfig = config.mobs[type] ?: config.default
 
         val announceAll = entityConfig.all
-        if (announceAll) return true
+        if (announceAll) return everyone
 
         val announceNamed = entityConfig.named
-        if (announceNamed && entity.customName() != null) return true
+        if (announceNamed && entity.customName() != null) return everyone
 
         val announceTamed = entityConfig.tamed
-        if (announceTamed && entity is Tameable && entity.owner != null) return true
+        if (announceTamed && entity is Tameable && entity.owner != null) {
+            return if (config.broadcastTamedDeaths) everyone else listOf(entity.owner!!.uniqueId)
+        }
 
-        return false
+        return listOf()
     }
 
-    private fun announceDeath(entity: LivingEntity) {
+    private fun announceDeath(entity: LivingEntity, toAnnounceTo: List<UUID>) {
         val nmsEntity = (entity as CraftLivingEntity).handle
         var deathMessage = PaperAdventure.asAdventure(nmsEntity.combatTracker.deathMessage.copy())
 
@@ -104,8 +109,9 @@ class NotableDeaths : JavaPlugin(), Listener {
             deathMessage = mm.deserialize("<green><click:suggest_command:'/tp @s ${location.blockX} ${location.blockY} ${location.blockZ}'><hover:show_text:'${mm.serialize(clickToTeleport)}'>${mm.serialize(wrapped)}</hover></click></green> ${mm.serialize(deathMessage)}")
         }
 
-        server.onlinePlayers.forEach {
-            it.sendMessage(deathMessage)
+        toAnnounceTo.forEach {
+            val player = server.getPlayer(it)
+            player?.sendMessage(deathMessage)
         }
 
         server.consoleSender.sendMessage(deathMessage)
@@ -138,12 +144,15 @@ class NotableDeaths : JavaPlugin(), Listener {
     private fun onTamedDeath(event: TameableDeathMessageEvent) {
         val entity = event.entity
 
-        if (shouldAnnounceDeath(entity)) event.isCancelled = true
+        val witnesses = getDeathWitnesses(entity)
+        if (witnesses.isNotEmpty()) event.isCancelled = true
     }
 
     @EventHandler
     private fun onDeath(event: EntityDeathEvent) {
         val entity = event.entity
-        if (shouldAnnounceDeath(entity)) announceDeath(entity)
+
+        val witnesses = getDeathWitnesses(entity)
+        announceDeath(entity, witnesses)
     }
 }

@@ -21,6 +21,11 @@ class Config {
     @Comment("The default configuration for mobs\nConfiguration under 'mobs' overrides this")
     var default = EntityConfiguration(named = true)
 
+    @Comment("Whether the deaths of tamed entities should be announced to everyone on the server," +
+            "\ninstead of just the pet owner" +
+            "\nThis option only takes effect if the death is set to be announced for that tamed entity.")
+    var broadcastTamedDeaths = false
+
     @Comment("Overrides for specific entities")
     var mobs: Map<EntityType, EntityConfiguration> = mapOf(
         Pair(EntityType.VILLAGER, EntityConfiguration(all = true)),
