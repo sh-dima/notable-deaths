@@ -94,7 +94,7 @@ License
 
 © 2025 [Дима Ш.][author]
 
-[Notable Deaths](./) is licensed under the [AGPL 3.0](./LICENSE) only.
+[Notable Deaths](./) is licensed under the [AGPL 3.0](./LICENSE.txt) only.
 
 Disclaimer
 ----------
