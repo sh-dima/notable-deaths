@@ -101,7 +101,7 @@ tasks {
         minecraftVersion(version)
 
         downloadPlugins {
-            modrinth("UmLGoGij", "1.30.2")
+            modrinth("UmLGoGij", "1.30.4") // DiscordSRV
         }
     }
 }
