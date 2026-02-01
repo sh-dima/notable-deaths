@@ -118,5 +118,5 @@ bukkit {
         "Esoteric Enderman"
     )
 
-    website = "https://gitlab.com/shdima/notable-deaths"
+    website = "https://gitlab.com/-/p/75274998"
 }
